@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- NORDEN 제품 레코드
+: 1인 가구를 위한 공간 절약형 IKEA 가구의 예시 레코드 -->
+<ik:ikeaCatalog
+    xmlns:ik="https://nhk.singlepersonhousehold/ikea"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://nhk.singlepersonhousehold/ikea nhkikea.xsd">
+
+    <!-- 개별 IKEA 제품 메타데이터 -->
+    <ik:product>
+
+        <!-- 제품명 -->
+        <dc:title>NORDEN</dc:title>
+        <!-- IKEA Article ID + 어느나라 고유번호인지 표시 -->
+        <dc:identifier>704.223.94(South Korea)</dc:identifier>
+        <!-- 제품 설명 -->
+        <dc:description>
+            This classic gateleg table combines a centuries-old, space-saving design with a clean look, 
+            making it an ideal choice for homes where space is limited. Featuring convenient drop-leaves, 
+            it easily adjusts to seat two to four people according to your needs, while six integrated 
+            drawers beneath the tabletop offer smart storage for cutlery, napkins, and candles. 
+            It is rigorously tested for stability and safety to withstand years of everyday indoor use. 
+        </dc:description>
+        <!-- 가구 카테고리 -->
+        <ik:category>Tables and chairs</ik:category>
+        <!-- 디자인 스타일 -->
+        <ik:style>Scandinavian</ik:style>
+        <ik:style>Natural</ik:style>
+        <ik:style>SpaceSaving</ik:style>
+        <!-- 주요 재질 -->
+        <ik:material>Particleboard</ik:material>
+        <ik:material>Solid wood</ik:material>
+        <ik:material>Fibreboard</ik:material>
+        <!-- 색상 -->
+        <ik:colour>White</ik:colour>
+        <!-- 제품 크기 -->
+        <ik:dimensions>80x152x74cm</ik:dimensions>
+        <!-- 가격(KRW) -->
+        <ik:price>299000</ik:price>
+        <!-- 조립 난이도 -->
+        <ik:assembly>Moderate(2People)</ik:assembly>
+        <!-- 다기능성 설명 -->
+        <ik:multifunction>
+            The space-saving gateleg design provides a highly versatile, multi-functional solution, 
+            allowing it to be freely transformed according to your needs. It functions perfectly 
+            as a compact console table when fully folded, a cozy 2-seat dining table with one leaf raised, 
+            or an expanded 4-seat dining and working station when fully opened—all while offering smart storage 
+            with its 6 integrated drawers.
+        </ik:multifunction>
+        <!-- 공간 활용 특성 -->
+        <ik:spaceEfficiency>Foldable</ik:spaceEfficiency>
+        <ik:spaceEfficiency>Multipurpose</ik:spaceEfficiency>
+        <!-- 무게(kg) -->
+        <ik:weight>47.01</ik:weight>
+        <!-- 연관 상품 -->
+        <ik:relatedItems label="FRÖSVI folding chair">
+            605.343.30
+        </ik:relatedItems>
+        <ik:relatedItems label="LISABO chair">
+            505.610.41
+        </ik:relatedItems>
+        <ik:url>https://www.ikea.com/kr/ko/p/norden-gateleg-table-white-70422394/</ik:url>
+
+    </ik:product>
+</ik:ikeaCatalog>
