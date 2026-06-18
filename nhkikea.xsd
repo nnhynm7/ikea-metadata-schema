@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+설계 의도: 본 xsd는 전세계 1인 가구를 위한 IKEA 가구 제품 정보를 구조적으로 기술하기 위해 설계되었다.
+일반적인 서지 정보는 Dublin Core의 개념을 참고하였으며 
+가구의 특성과 공간 활용성을 표현하기 위해 사용자 정의 요소를 추가했다.
+예시 데이터는 IKEA Korea 제품을 사용하였지만,
+스키마 구조 자체는 다른나라 IKEA 제품에도 적용이 가능하다.
+
+1차 AI 사용 내역:
+ChatGPT를 활용하여 초기 XSD 구조를 생성했다.
+이후 직접 검토 및 수정하여 다음 사항을 반영했다.
+1. 제어어휘 적용
+2. 데이터 딕셔너리 기반 추가
+3. 요소 반복 여부 조정
+4. 관련 상품을 위한 complexType 설계
+
+2차 AI 사용 내역:
+ChatGPT를 활용하여 최종 XSD 검토 및 문서화 작업을 지원받았다.
+이후 직접 검토 및 수정하여 다음 사항을 반영하였다.
+1. 주석 작성 및 보완
+2. xsd 파일 내용 검토
+3. XML 샘플 레코드와 XSD의 일관성 점검
+-->
+
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="https://nhk.singlepersonhousehold/ikea"
+    xmlns:ik="https://nhk.singlepersonhousehold/ikea"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    targetNamespace="https://nhk.singlepersonhousehold/ikea"
+    elementFormDefault="qualified">
+
+    <!-- Dublin Core 메타데이터 요소를 가져와 제목(title), 식별자(identifier), 설명(description)과 같은 
+    기본 서지 정보를 재사용하기 위해 import함. -->
+
+<xs:import
+    namespace="http://purl.org/dc/elements/1.1/"
+    schemaLocation="https://dublincore.org/schemas/xmls/simpledc20021212.xsd"/>
+
+    <!-- 가구 카테고리를 사전에 정의된 제어 어휘(Controlled Vocabularies)로 제한함. -->
+    <xs:simpleType name="Category">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Storage and organization"/>
+            <xs:enumeration value="Beds and mattresses"/>
+            <xs:enumeration value="Kitchen, appliances and supplies"/>
+            <xs:enumeration value="Outdoor products"/>
+            <xs:enumeration value="Tables and chairs"/>
+            <xs:enumeration value="Storage containers, organizers and baskets"/>
+            <xs:enumeration value="Home storage and organisation"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- 가구 스타일 값을 사전에 정의된 제어 어휘(Controlled Vocabulary)로 제한함. -->
+    <xs:simpleType name="Style">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Minimalist"/>
+            <xs:enumeration value="Modern"/>
+            <xs:enumeration value="Scandinavian"/>
+            <xs:enumeration value="Industrial"/>
+            <xs:enumeration value="Natural"/>
+            <xs:enumeration value="Multifunctional"/>
+            <xs:enumeration value="SpaceSaving"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- 가구 조립 정보값을 사전에 정의된 제어 어휘(Controlled Vocabulary)로 제한함. -->
+    <xs:simpleType name="Assembly">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="FullyAssembled"/>
+            <xs:enumeration value="Easy(1Person)"/>
+            <xs:enumeration value="Moderate(2People)"/>
+            <xs:enumeration value="Difficult(professionalneeded)"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- 가구 공간 활용도 유형값을 사전에 정의된 제어 어휘(Controlled Vocabulary)로 제한함. -->
+    <xs:simpleType name="SpaceEfficiency">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="WallMounted"/>
+            <xs:enumeration value="Foldable"/>
+            <xs:enumeration value="Stackable"/>
+            <xs:enumeration value="Multipurpose"/>
+            <xs:enumeration value="CompactFixed"/>
+            <xs:enumeration value="SpaceSaving"/>
+            <xs:enumeration value="Freestanding"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- 연관 제품 유형: 연관된 IKEA 제품의 식별자(ID)와 명칭(Label)을 저장함. -->
+    <xs:complexType name="RelatedItems">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute
+                    name="label"
+                    type="xs:string"
+                    use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- 제품 유형: IKEA 제품의 주요 메타데이터를 구조화하여 기술하기 위한 유형 -->
+    <xs:complexType name="ProductType">
+        <xs:sequence>
+<!--Dublin Core의 title 요소를 재사용하여 IKEA 제품의 공식 명칭을 표준화된 방식으로 기술함. -->
+            <xs:element ref="dc:title">
+            <xs:annotation>
+                <xs:documentation>
+                    A name given to the resource.
+                </xs:documentation>
+            </xs:annotation>
+            </xs:element>
+<!--Dublin Core의 identifier 요소를 재사용하여 각 제품을 고유하게 식별할 수 있는 값을 기술함. -->
+            <xs:element ref="dc:identifier">
+            <xs:annotation>
+                <xs:documentation>
+                    An unambiguous reference to the resource within a given context.
+                </xs:documentation>
+            </xs:annotation>
+            </xs:element>
+<!-- Dublin Core의 description 요소를 재사용하여 제품의 특징과 용도를 설명함. -->
+            <xs:element ref="dc:description">
+            <xs:annotation>
+                <xs:documentation>
+                    An account of the resource.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:element>
+<!-- 가구의 카테고리를 표현하기 위한 요소임. 
+데이터의 일관성을 유지하기 위해 CategoryType에 정의된 제어어휘만 사용할 수 있도록 제한함.
+출처: GoodRelations
+URL: http://purl.org/goodrelations/v1
+스키마 identifier: http://www.heppnetz.de/ontologies/goodrelations/v1#category -->
+            <xs:element name="category" 
+                        type="ik:Category">
+            <xs:annotation>
+                <xs:documentation>
+                    Type of furniture.
+                </xs:documentation>
+            </xs:annotation>
+            </xs:element>
+<!-- 제품의 디자인 스타일을 표현하기 위한 요소임. 
+하나의 제품이 여러 스타일 특성을 가질 수 있으므로 반복 입력을 허용함.
+출처: SKOS
+URL: http://www.w3.org/2004/02/skos/core#
+스키마 identifier: https://www.w3.org/2009/08/skos-reference/skos.html#Concept
+가구 스타일을 제어어휘로 관리하기 위해 SKOS의 개념 체계를 참고함. -->
+            <xs:element
+                name="style"
+                type="ik:Style"
+                minOccurs="1"
+                maxOccurs="unbounded">
+            <xs:annotation>
+                <xs:documentation>
+                    Design style.
+                </xs:documentation>
+            </xs:annotation>
+            </xs:element>
+<!-- 제품의 주요 재질을 기록하기 위한 요소임. 
+ 목재, 금속, 플라스틱 등 다양한 재질 정보를 자유롭게 기술할 수 있도록 문자열 타입을 사용함.
+출처: Schema.org
+URL: https://schema.org/
+스키마 identifier: https://schema.org/material -->
+            <xs:element
+                name="material"
+                type="xs:string"
+                minOccurs="1"
+                maxOccurs="unbounded">
+            <xs:annotation>
+                <xs:documentation>
+                    Primary materials.
+                </xs:documentation>
+            </xs:annotation>
+            </xs:element>
+<!-- 제품의 색상 정보를 기록하기 위한 요소임. 
+동일 제품이라도 색상에 따라 이용자의 선호도가 달라질 수 있으므로 별도 요소로 기술함. 
+색상 표현의 유연성을 위해 문자열 타입을 사용함.
+출처: Schema.org
+URL: https://schema.org/
+스키마 identifier: https://schema.org/color -->
+            <xs:element
+                name="colour"
+                type="xs:string"
+                minOccurs="1"
+                maxOccurs="unbounded">
+            <xs:annotation>
+                <xs:documentation>
+                    Product colour.
+                </xs:documentation>
+            </xs:annotation>
+            </xs:element>
+<!-- 제품의 크기와 공간 점유 정도를 표현하기 위한 요소임. 
+가구의 가로, 세로, 높이 등 다양한 형식의 치수 정보를 유연하게 기록할 수 있도록 문자열 타입을 사용함.
+WidthxDepth(Length)xHeight 포맷을 추천함.
+출처: Schema.org
+URL: https://schema.org/
+스키마 identifier: https://schema.org/width
+                  https://schema.org/depth
+                  https://schema.org/height -->
+            <xs:element name="dimensions"
+                        type="xs:string">
+            <xs:annotation>
+                <xs:documentation>
+                    Product dimensions as provided by IKEA.
+                </xs:documentation>
+            </xs:annotation>
+            </xs:element>
+<!-- 제품의 가격 정보를 기록하기 위한 요소임.
+제품 간 가격 비교와 구매 의사결정을 지원하기 위해 별도 요소로 기술함.
+정확한 금액 표현을 위해 소수값을 저장할 수 있는 xs:decimal 타입을 사용함. -->
+           <xs:element name="price" 
+                       type="xs:decimal">
+            <xs:annotation>
+                <xs:documentation>
+                    Retail price in the local currency.
+                </xs:documentation>
+            </xs:annotation>
+            </xs:element>
+<!-- 제품의 조립 난이도를 표현하기 위한 요소임. 
+사용자에게 조립 편의성을 제공하기 위해 사전에 정의된 제어어휘만 사용할 수 있도록 제한함.
+조립 난이도는 구매 결정에 영향을 줄 수 있으므로 별도 요소로 기술함. -->
+            <xs:element name="assembly" 
+                        type="ik:Assembly">
+            <xs:annotation>
+                <xs:documentation>
+                    Assembly difficulty and requirements.
+                </xs:documentation>
+            </xs:annotation>
+            </xs:element>
+<!-- 제품의 다기능성과 활용 가능성을 설명하기 위한 요소임. 
+하나의 가구가 여러 용도로 사용될 수 있는 특성을 자유롭게 기술할 수 있도록 문자열 타입을 사용함. 
+기존 메타데이터 표준만으로는 가구의 다기능성을 충분히 표현하기 어려워 별도 요소로 추가함. 
+1인 가구의 가구 선택에서 중요한 특징임. -->
+            <xs:element
+                name="multifunction"
+                type="xs:string">
+            <xs:annotation>
+                <xs:documentation>
+                    Versatility and multi-functionality.
+                </xs:documentation>
+            </xs:annotation>
+            </xs:element>
+<!-- 1인 가구의 주거 환경에 적합한 공간 활용 특성을 표현하기 위한 요소임. 
+공간 절약 방식을 일관되게 기술하기 위해 제어어휘를 사용함.
+1인 가구 및 소형 주거 공간을 고려한 핵심 요소임.
+하나의 제품이 여러 공간 활용 특성을 동시에 가질 수 있으므로 반복 입력을 허용함. -->
+            <xs:element
+                name="spaceEfficiency"
+                type="ik:SpaceEfficiency"
+                minOccurs="1"
+                maxOccurs="unbounded">
+            <xs:annotation>
+                <xs:documentation>
+                    Suitability for small spaces.
+                </xs:documentation>
+            </xs:annotation>
+            </xs:element>
+<!-- 제품의 무게를 기록하기 위한 요소임. 
+무게는 운반, 조립, 이동 편의성에 영향을 주는 중요한 정보이므로 정확한 수치 표현을 위해 소수값을 저장할 수 있는 xs:decimal 타입을 사용함.
+출처: Schema.org
+URL: https://schema.org/
+스키마 identifier: https://schema.org/weight -->
+            <xs:element name="weight" 
+                        type="xs:decimal">
+            <xs:annotation>
+                <xs:documentation>
+                    Product weight in kilograms.
+                </xs:documentation>
+            </xs:annotation>
+            </xs:element>
+<!-- 현재 제품과 함께 사용할 수 있는 관련 IKEA 제품을 연결하기 위한 요소임.
+제품 간의 연관성을 표현하여 사용자가 호환되거나 함께 구매할 수 있는 상품을 쉽게 확인할 수 있도록 설계함. 
+하나의 제품이 여러 관련 상품을 가질 수 있으므로 반복 입력을 허용하였으며, 관련 상품이 없는 경우도 존재할 수 있어 선택 요소(minOccurs="0")로 정의함.
+관련 상품의 식별자와 사람이 읽을 수 있는 상품명을 함께 제공해야 하므로 복합 타입(complex type)으로 설계함.
+출처: Schema.org
+URL: https://schema.org/
+스키마 identifier: https://schema.org/isRelatedTo -->
+            <xs:element
+                name="relatedItems"
+                type="ik:RelatedItems"
+                minOccurs="0"
+                maxOccurs="unbounded">
+            <xs:annotation>
+                <xs:documentation>
+                    Related IKEA products.
+                </xs:documentation>
+            </xs:annotation>
+            </xs:element>
+<!-- 제품의 공식 IKEA 웹페이지에 접근하여 자세한 정보들을 확인할 수 있도록 URL 정보를 제공함.
+출처: Schema.org
+URL: https://schema.org/
+스키마 identifier: https://schema.org/url -->
+            <xs:element 
+                name="url" 
+                type="xs:anyURI">
+            <xs:annotation>
+                <xs:documentation>
+                    URL of the item.
+                </xs:documentation>
+            </xs:annotation>
+            </xs:element>
+
+        </xs:sequence>
+
+    </xs:complexType>
+
+    <!-- 루트 요소:  여러 IKEA 가구 정보를 저장하는 루트 요소
+    본 스키마의 최상위(루트) 요소로서 여러 IKEA 가구 제품의 메타데이터 레코드를 하나의 XML 문서에서 관리할 수 있도록 설계함.
+    각 제품은 product 요소로 표현되며, 하나 이상의 제품 레코드를 포함할 수 있도록 반복 입력을 허용함. -->
+    <xs:element name="ikeaCatalog">
+        <xs:annotation>
+            <xs:documentation>
+                Collection of IKEA furniture metadata records designed for evaluating suitability in single-person households.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <!-- 개별 IKEA 가구 제품의 메타데이터를 저장하기 위한 요소임. 각 product 요소는 ProductType에 정의된 구조를 따르며,
+                하나의 제품에 대한 모든 기술 정보를 포함함. -->
+                <xs:element
+                    name="product"
+                    type="ik:ProductType"
+                    minOccurs="1"
+                    maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
