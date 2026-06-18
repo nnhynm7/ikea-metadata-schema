@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- MULIG Clothes rack 제품 레코드
+: 1인 가구를 위한 공간 절약형 IKEA 가구의 예시 레코드 -->
+<ik:ikeaCatalog
+    xmlns:ik="https://nhk.singlepersonhousehold/ikea"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://nhk.singlepersonhousehold/ikea nhkikea.xsd">
+
+    <!-- 개별 IKEA 제품 메타데이터 -->
+    <ik:product>
+
+        <!-- 제품명 -->
+        <dc:title>MULIG Clothes rack</dc:title>
+        <!-- IKEA Article ID -->
+        <dc:identifier>801.794.33(South Korea)</dc:identifier>
+        <!-- 제품 설명 -->
+        <dc:description>
+            Say goodbye to piles of messy clothes. With this versatile clothes rack and a few hangers, 
+            you can easily organize your shirts, blouses, and trousers in a neat, orderly row. 
+            Engineered for ultimate placement flexibility, it is perfectly safe to use anywhere in your home, 
+            including damp environments like bathrooms and covered balconies. Additionally, the integrated 
+            plastic feet ensure your floor surfaces remain well-protected against scratches.
+        </dc:description>
+        <!-- 가구 카테고리 -->
+        <ik:category>Home storage and organisation</ik:category>
+        <!-- 디자인 스타일 -->
+        <ik:style>Modern</ik:style>
+        <ik:style>Minimalist</ik:style>
+        <!-- 주요 재질 -->
+        <ik:material>Steel</ik:material>
+        <!-- 색상 -->
+        <ik:colour>White</ik:colour>
+        <!-- 제품 크기 -->
+        <ik:dimensions>99x46x152cm</ik:dimensions>
+        <!-- 가격(KRW) -->
+        <ik:price>15000</ik:price>
+        <!-- 조립 난이도 -->
+        <ik:assembly>Easy(1Person)</ik:assembly>
+        <!-- 다기능성 설명 -->
+        <ik:multifunctionality>
+           This modern clothes rack delivers exceptional multi-functional utility throughout the home. 
+           Beyond acting as a standard wardrobe organizer for shirts, blouses, and trousers, its specialized 
+           weather-resistant construction allows it to safely transition into humid environments, doubling as an 
+           effective drying rack in bathrooms or on covered balconies. Additionally, the open, accessible design 
+           serves as a sleek temporary garment station for guests or an easy-access display for daily outerwear essentials.
+        </ik:multifunctionality>
+        <!-- 공간 활용 특성 -->
+        <ik:spaceEfficiency>SpaceSaving</ik:spaceEfficiency>
+        <ik:spaceEfficiency>Freestanding</ik:spaceEfficiency>
+        <ik:spaceEfficiency>CompactFixed</ik:spaceEfficiency>
+        <!-- 무게(kg) -->
+        <ik:weight>3.10</ik:weight>
+        <!-- 연관 상품 -->
+        <ik:relatedItems label="TRYSSE Hanger">
+            105.150.70
+        </ik:relatedItems>
+        <ik:relatedItems label="SKUBB Clothes cover">
+            301.794.64
+        </ik:relatedItems>
+        <ik:url>https://www.ikea.com/kr/ko/p/mulig-clothes-rack-white-80179433/</ik:url>
+
+    </ik:product>
+</ik:ikeaCatalog>
