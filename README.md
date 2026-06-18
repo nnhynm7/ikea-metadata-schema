@@ -146,7 +146,7 @@ To ensure descriptive consistency and semantic richness, this custom schema inte
 | URI             | https://nhk.singlepersonhousehold/ikea/colour     |
 | Full Definition | Primary product colour (e.g. White, Black, etc)   |
 | Data Values     | String                                            |
-| Cardinality     | Mandatory, Repeatable                             |
+| Cardinality     | Mandatory,Non-repeatable                             |
 | Comments        | This uses colours from the official IKEA website. |
 | Example         | White, Black                                      |
 
