@@ -43,7 +43,6 @@ To ensure descriptive consistency and semantic richness, this custom schema inte
 | ------------------ | ---------------------------------------------------------------- | ----------------------------------------- |
 | dc:title           | A name given to the resource.                                    | -                                         |
 | dc:identifier      | An unambiguous reference to the resource within a given context. | -                                         |
-| ik:url             | URL of the item.                                                 | schema:url                                |
 | dc:description     | An account of the resource.                                      | -                                         |
 | ik:category        | Type of furniture (e.g. Bookcase, Bed).                          | gr:category                               |
 | ik:style           | Design style (e.g. Minimalist, Modern).                          | skos:Concept                              |
@@ -52,10 +51,11 @@ To ensure descriptive consistency and semantic richness, this custom schema inte
 | ik:dimensions      | Product dimensions (Width × Depth × Height).                     | schema:width, schema:depth, schema:height |
 | ik:price           | Retail price.                                                    | Custom                                    |
 | ik:assembly        | Assembly difficulty and requirements.                            | Custom                                    |
-| ik:multifunction   | Versatility and multi-functionality.                             | Custom                                    |
+| ik:multifunctionality   | Versatility and multi-functionality.                             | Custom                                    |
 | ik:spaceEfficiency | Suitability for small spaces.                                    | Custom                                    |
 | ik:weight          | Product weight.                                                  | schema:weight                             |
 | ik:relatedItems    | Related products suitable for use with an object.                | schema:isRelatedTo                        |
+| ik:url             | URL of the item.                                                 | schema:url                                |
 
 ## Full Data Dictionary
 
@@ -184,36 +184,36 @@ To ensure descriptive consistency and semantic richness, this custom schema inte
 | Label           | Assembly Difficulty                               |
 | URI             | https://nhk.singlepersonhousehold/ikea/assembly   |
 | Full Definition | Assembly difficulty and requirements              |
-| Data Values     | Controlled Vocabulary (FullyAssembled, Easy[1person], Moderate[2people], Difficult[professionalneeded])                                        |
+| Data Values     | Controlled Vocabulary                             |
 | Cardinality     | Mandatory, Non-repeatable                         |
 | Comments        | Information on whether assembly tools are included can be added as a supplementary note.                                                   |
-| Example         | Fully-assembled                                   |
+| Example         | FullyAssembled                                    |
 
-### ik:multifunction
+### ik:multifunctionality
 
-| Field           | Value                                                |
-| --------------- | ---------------------------------------------------- |
-| Element Name    | ik:multifunction                                     |
-| Label           | Multifunctionality                                   |
-| URI             | https://nhk.singlepersonhousehold/ikea/multifunction |
-| Full Definition | Versatility and multi-functionality                  |
-| Data Values     | String (Description)                                 |
-| Cardinality     | Mandatory, Non-repeatable                            |
-| Comments        | This is the criterion for assessing space-saving efficiency for single-person households.                                                              |
-| Example         |Bed, Sofa, and Storage                                |
+| Field           | Value                                                     |
+| --------------- | --------------------------------------------------------- |
+| Element Name    | ik:multifunctionality                                     |
+| Label           | Multifunctionality                                        |
+| URI             | https://nhk.singlepersonhousehold/ikea/multifunctionality |
+| Full Definition | Versatility and multi-functionality                       |
+| Data Values     | String (Description)                                      |
+| Cardinality     | Mandatory, Non-repeatable                                 |
+| Comments        | This is the criterion for assessing space-saving efficiency for single-person households.                                                                   |
+| Example         |Bed, Sofa, and Storage                                     |
 
 ### ik:spaceEfficiency
 
-| Field           | Value                                             |
-| --------------- | ------------------------------------------------- |
-| Element Name    | ik:spaceEfficiency                                |
-| Label           | Space Efficiency                                  |
-| URI             | https://nhk.singlepersonhousehold/ikea/price      |
-| Full Definition | Suitability for small spaces                      |
-| Data Values     | Controlled Vocabulary (WallMounted, Foldable, Stackable, Multipurpose, CompactFixed, etc)                                                    |
-| Cardinality     | Mandatory, Repeatable                             |
-| Comments        | Categorizes the specific ways this furniture secures space in the cramped living environments of single-person households.                      |
-| Example         | WallMounted                                       |
+| Field           | Value                                                  |
+| --------------- | ------------------------------------------------------ |
+| Element Name    | ik:spaceEfficiency                                     |
+| Label           | Space Efficiency                                       |
+| URI             | https://nhk.singlepersonhousehold/ikea/spaceefficiency |
+| Full Definition | Suitability for small spaces                           |
+| Data Values     | Controlled Vocabulary                                  |
+| Cardinality     | Mandatory, Repeatable                                  |
+| Comments        | Categorizes the specific ways this furniture secures space in the cramped living environments of single-person households.                           |
+| Example         | WallMounted                                            |
 
 ### ik:weight
 
@@ -222,8 +222,8 @@ To ensure descriptive consistency and semantic richness, this custom schema inte
 | Element Name    | ik:weight                                         |
 | Label           | Weight                                            |
 | URI             | https://nhk.singlepersonhousehold/ikea/weight     |
-| Full Definition | Product weight(unit in kg)                        |
-| Data Values     | Numeric                                           |
+| Full Definition | Product weight(unit: kg)                          |
+| Data Values     | Decimal                                           |
 | Cardinality     | Mandatory, Non-repeatable                         |
 | Comments        | Refer to IKEA website.                            |
 | Example         | 34.5                                              |
@@ -252,4 +252,4 @@ To ensure descriptive consistency and semantic richness, this custom schema inte
 | Data Values     | URI (xs:anyURI)                                   |
 | Cardinality     | Mandatory, Non-repeatable                         |
 | Comments        | Provide the URL of the official IKEA product page. This allows users to access detailed product information, images, and purchasing options.         |
-| Example         | https://www.ikea.com/kr/ko/p/skubb-clothes-cover-set-of-3-white-30179464                                                                             |
+| Example         | https://www.ikea.com/kr/ko/p/skubb-clothes-cover-set-of-3-white-30179464 |
