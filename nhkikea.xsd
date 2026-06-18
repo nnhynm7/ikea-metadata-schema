@@ -290,7 +290,9 @@ URL: https://schema.org/
 출처: Schema.org
 URL: https://schema.org/
 스키마 identifier: https://schema.org/url -->
-            <xs:element name="url" type="xs:anyURI">
+            <xs:element 
+                name="url" 
+                type="xs:anyURI">
             <xs:annotation>
                 <xs:documentation>
                     URL of the item.
