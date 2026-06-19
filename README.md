@@ -186,7 +186,7 @@ To ensure descriptive consistency and semantic richness, this custom schema inte
 | Full Definition | Assembly difficulty and requirements              |
 | Data Values     | Controlled Vocabulary                             |
 | Cardinality     | Mandatory, Non-repeatable                         |
-| Comments        | Information on whether assembly tools are included can be added as a supplementary note.                                                   |
+| Comments        | Refer to IKEA website.                            |
 | Example         | FullyAssembled                                    |
 
 ### ik:multifunctionality
